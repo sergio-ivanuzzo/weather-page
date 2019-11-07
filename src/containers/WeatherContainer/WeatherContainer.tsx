@@ -9,11 +9,6 @@ import * as WeatherActions from 'actions/weatherActions';
 import { awaitify, IPromiseMethod } from 'helpers/awaitify';
 
 class WeatherContainer extends React.Component<IWeatherContainerProps> {
-
-    async componentDidMount(): Promise<void> {
-        await this.fetchWeather(null);
-    }
-
     public render(): React.ReactNode {
         return this.props.children(this.injectedProps);
     }

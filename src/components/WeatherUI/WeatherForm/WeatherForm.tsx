@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import Box from "@material-ui/core/Box";
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 
@@ -8,29 +9,39 @@ import { IWeatherFormState } from "components/WeatherUI/WeatherForm/WeatherFormS
 
 export class WeatherForm extends React.Component<IWeatherFormProps, IWeatherFormState> {
     public state: IWeatherFormState = {
-        cityName: ""
+        cityName: '',
+        countryCode: ''
     };
 
     public render(): React.ReactNode {
         return (
-            <form noValidate autoComplete="off">
-                <div>
-                    <TextField
-                        label="City name"
-                        value={this.state.cityName}
-                        onChange={this.handleChange('cityName')}
-                    />
-                </div>
-                <div>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={this.sendRequest}
-                    >
-                        Send
-                    </Button>
-                </div>
-            </form>
+            <Box>
+                <form noValidate autoComplete="off">
+                    <div>
+                        <TextField
+                            label="City Name"
+                            value={this.state.cityName}
+                            onChange={this.handleChange('cityName')}
+                        />
+                    </div>
+                    <div>
+                        <TextField
+                            label="Country Code"
+                            value={this.state.countryCode}
+                            onChange={this.handleChange('countryCode')}
+                        />
+                    </div>
+                    <div>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={this.sendRequest}
+                        >
+                            Send
+                        </Button>
+                    </div>
+                </form>
+            </Box>
         );
     }
 
@@ -42,10 +53,14 @@ export class WeatherForm extends React.Component<IWeatherFormProps, IWeatherForm
         const value = event.currentTarget.value;
         this.setState({
             [fieldName]: value
-        })
+        } as Pick<IWeatherFormState, keyof IWeatherFormState>);
     };
 
     protected sendRequest = async (): Promise<void> => {
-        // something
+        if (this.state.cityName && this.state.countryCode) {
+            await this.props.fetchWeather({
+                q: `${this.state.cityName},${this.state.countryCode}`
+            });
+        }
     };
 }

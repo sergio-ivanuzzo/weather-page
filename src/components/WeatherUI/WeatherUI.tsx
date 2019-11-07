@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Container from '@material-ui/core/Container';
 
+import { IForecastData } from 'reducers/weatherReducer';
+import { maybe } from 'helpers/maybe';
+
 import { WeatherForm } from 'components/WeatherUI/WeatherForm';
 import { IWeatherUIProps } from 'components/WeatherUI/WeatherUIProps';
 import { IWeatherUIState } from 'components/WeatherUI/WeatherUIState';
-import {IForecastData} from 'reducers/weatherReducer';
-import {WeatherCard} from 'components/WeatherUI/WeatherCard';
-import { maybe } from 'helpers/maybe';
+import { WeatherCard } from 'components/WeatherUI/WeatherCard';
 
 export class WeatherUI extends React.Component<IWeatherUIProps, IWeatherUIState> {
     public state: IWeatherUIState = {

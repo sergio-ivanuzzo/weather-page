@@ -1,7 +1,6 @@
 import { AnyAction } from 'redux';
 
 import { IPromiseMethod } from 'helpers/awaitify';
-import Any = jasmine.Any;
 
 export enum WeatherActionType {
     WEATHER_FETCH = 'WEATHER_FETCH',
