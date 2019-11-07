@@ -14,7 +14,7 @@
       "reducers/*": ["./src/store/reducers/*"],
       "containers/*": ["./src/containers/*"],
       "components/*": ["./src/components/*"],
-      "helpers/*": ["./src/helpers/*"],
+      "helpers": ["./src/helpers"],
       "httpClient/*": ["./src/httpClient/*"],
       "*": [
         "*"

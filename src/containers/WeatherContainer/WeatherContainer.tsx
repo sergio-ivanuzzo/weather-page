@@ -6,7 +6,7 @@ import { IWeatherContainerChildProps, IWeatherContainerProps } from './WeatherCo
 import { IStoreState } from 'reducers/rootReducer';
 
 import * as WeatherActions from 'actions/weatherActions';
-import { awaitify, IPromiseMethod } from 'helpers/awaitify';
+import { awaitify, IPromiseMethod } from 'helpers';
 
 class WeatherContainer extends React.Component<IWeatherContainerProps> {
     public render(): React.ReactNode {

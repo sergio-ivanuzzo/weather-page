@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IPromiseMethod } from 'helpers/awaitify';
+import { IPromiseMethod } from 'helpers';
 import { IWeatherData } from 'reducers/weatherReducer';
 
 export interface IWeatherContainerProps {

@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 
-import { IPromiseMethod } from 'helpers/awaitify';
+import { IPromiseMethod } from 'helpers';
 
 export enum WeatherActionType {
     WEATHER_FETCH = 'WEATHER_FETCH',

@@ -5,7 +5,7 @@ import { IForecastData } from "reducers/weatherReducer";
 export class WeatherCard extends React.Component<IForecastData> {
     public render(): React.ReactNode {
         return (
-            <Box>
+            <Box border={1}>
                 <div>
                     {this.props.dt_txt}
                 </div>

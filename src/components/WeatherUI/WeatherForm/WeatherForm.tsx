@@ -16,7 +16,7 @@ export class WeatherForm extends React.Component<IWeatherFormProps, IWeatherForm
     public render(): React.ReactNode {
         return (
             <Box>
-                <form noValidate autoComplete="off">
+                <form noValidate autoComplete="off" onSubmit={this.submitForm}>
                     <div>
                         <TextField
                             label="City Name"
@@ -35,7 +35,7 @@ export class WeatherForm extends React.Component<IWeatherFormProps, IWeatherForm
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={this.sendRequest}
+                            type="submit"
                         >
                             Send
                         </Button>
@@ -56,7 +56,9 @@ export class WeatherForm extends React.Component<IWeatherFormProps, IWeatherForm
         } as Pick<IWeatherFormState, keyof IWeatherFormState>);
     };
 
-    protected sendRequest = async (): Promise<void> => {
+    protected submitForm = async (event: React.FormEvent): Promise<void> => {
+        event.preventDefault();
+
         if (this.state.cityName && this.state.countryCode) {
             await this.props.fetchWeather({
                 q: `${this.state.cityName},${this.state.countryCode}`
