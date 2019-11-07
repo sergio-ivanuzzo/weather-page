@@ -1,5 +1,8 @@
 import { AnyAction } from 'redux';
 
+import { IPromiseMethod } from 'helpers/awaitify';
+import Any = jasmine.Any;
+
 export enum WeatherActionType {
     WEATHER_FETCH = 'WEATHER_FETCH',
     WEATHER_FETCH_COMPLETE = 'WEATHER_FETCH_COMPLETE',
@@ -8,9 +11,12 @@ export enum WeatherActionType {
 
 export interface IWeatherAction {
     readonly Request: {
+        type: string;
         payload: any;
-        resolve: (value?: any) => void;
-        reject: (value?: any) => void;
+        promise: {
+            resolve: IPromiseMethod;
+            reject: IPromiseMethod;
+        }
     }
 
     readonly Response: {
@@ -18,21 +24,31 @@ export interface IWeatherAction {
     }
 }
 
-export function actionWeatherFetch(
-    payload: any,
-    resolve: (value?: any) => void,
-    reject: (value?: any) => void
-): AnyAction {
-    return {
+export interface IWeatherRequestAction extends AnyAction {
+    payload: any;
+    promise: {
+        resolve: IPromiseMethod;
+        reject: IPromiseMethod;
+    }
+}
+
+export interface IWeatherResponseAction extends AnyAction {
+    payload: any;
+}
+
+export function actionWeatherFetch(payload: any, resolve: IPromiseMethod, reject: IPromiseMethod): AnyAction {
+    return <IWeatherRequestAction>{
         payload,
         type: WeatherActionType.WEATHER_FETCH,
-        resolve,
-        reject
+        promise: {
+            resolve,
+            reject
+        }
     }
 }
 
 export function actionWeatherFetchComplete(payload: any): AnyAction {
-    return {
+    return <IWeatherResponseAction>{
         payload,
         type: WeatherActionType.WEATHER_FETCH_COMPLETE
     }

@@ -2,24 +2,31 @@ import * as React from 'react';
 import { AnyAction, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
-import { IWeatherContainerProps } from './WeatherContainerProps';
+import { IWeatherContainerChildProps, IWeatherContainerProps } from './WeatherContainerProps';
 import { IStoreState } from 'reducers/rootReducer';
 
 import * as WeatherActions from 'actions/weatherActions';
-import { awaitify, IPromiseMethod } from "helpers/awaitify";
+import { awaitify, IPromiseMethod } from 'helpers/awaitify';
 
 class WeatherContainer extends React.Component<IWeatherContainerProps> {
 
     async componentDidMount(): Promise<void> {
-        await this.fetchWeather();
+        await this.fetchWeather(null);
     }
 
     public render(): React.ReactNode {
-        return this.props.children(this.props);
+        return this.props.children(this.injectedProps);
     }
 
-    protected fetchWeather = async () => {
-        await awaitify((resolve, reject) => this.props.fetchWeather(null, resolve, reject));
+    protected get injectedProps(): IWeatherContainerChildProps {
+        return {
+            weatherData: this.props.weatherData,
+            fetchWeather: this.fetchWeather
+        }
+    };
+
+    protected fetchWeather = async (request) => {
+        await awaitify((resolve, reject) => this.props.fetchWeather(request, resolve, reject));
     }
 }
 

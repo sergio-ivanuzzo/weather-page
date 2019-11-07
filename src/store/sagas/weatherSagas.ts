@@ -1,12 +1,11 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, Effect } from 'redux-saga/effects';
 import { AxiosResponse } from 'axios';
 
 import { client } from 'httpClient/client';
 import * as WeatherActions from 'actions/weatherActions';
-import { IWeatherAction } from 'actions/weatherActions';
+import { IWeatherRequestAction } from 'actions/weatherActions';
 
-export function* fetchWeather(params: IWeatherAction['Request']): IterableIterator<any> {
-    console.log(params);
+export function* fetchWeather(action: IWeatherRequestAction): IterableIterator<Effect> {
     try {
         let response: AxiosResponse<{data: any}> = yield call(() => client.get('/', {
             params: {
@@ -15,14 +14,14 @@ export function* fetchWeather(params: IWeatherAction['Request']): IterableIterat
         }));
 
         if (response) {
-            params.resolve();
+            action.promise.resolve();
             return yield put(WeatherActions.actionWeatherFetchComplete(response.data));
         } else {
-            params.reject();
+            action.promise.reject();
             return yield put(WeatherActions.actionWeatherError());
         }
     } catch (e) {
-        params.reject();
+        action.promise.reject();
         return yield put(WeatherActions.actionWeatherError());
     }
 }

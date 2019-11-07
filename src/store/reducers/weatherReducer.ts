@@ -45,13 +45,23 @@ export interface IWindData {
     speed: number;
 }
 
+export interface IRainData {
+    '3h': number;
+}
+
+export interface ISnowData {
+    '3h': number;
+}
+
 export interface IForecastData {
-    clouds: ICloudsData;
+    clouds?: ICloudsData;
     dt: number;
     dt_txt: string;
     main: IIndicatorsData;
     weather: Array<IWeatherDescription>;
-    wind: IWindData;
+    wind?: IWindData;
+    rain?: IRainData;
+    snow?: ISnowData;
 }
 
 export interface IWeatherData {

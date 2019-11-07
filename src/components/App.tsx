@@ -4,22 +4,25 @@ import { Provider } from 'react-redux';
 
 import { store } from 'store/store';
 
-import WeatherContainer from 'containers/WeatherContainer';
-import { IWeatherData } from 'reducers/weatherReducer';
+import WeatherContainer, { IWeatherContainerChildProps } from 'containers/WeatherContainer';
+import { WeatherUI } from "components/WeatherUI/WeatherUI";
+
 
 class App extends React.Component {
     public render(): React.ReactNode {
         return (
             <Provider store={store}>
                 <WeatherContainer>
-                    {this.renderTable}
+                    {this.renderWeatherUI}
                 </WeatherContainer>
             </Provider>
         );
     }
 
-    protected renderTable = (props: IWeatherData): React.ReactNode => {
-        return 'test';
+    protected renderWeatherUI = (props: IWeatherContainerChildProps): React.ReactNode => {
+        return (
+            <WeatherUI {...props} />
+        );
     }
 }
 
