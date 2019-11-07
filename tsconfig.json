@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "baseUrl": ".",
+    "declaration": true,
+    "outDir": "./dist/",
+    "removeComments": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "paths": {
+      "store/*": ["./src/store/*"],
+      "actions/*": ["./src/store/actions/*"],
+      "reducers/*": ["./src/store/reducers/*"],
+      "containers/*": ["./src/containers/*"],
+      "components/*": ["./src/components/*"],
+      "helpers/*": ["./src/helpers/*"],
+      "httpClient/*": ["./src/httpClient/*"],
+      "*": [
+        "*"
+      ]
+    }
+  },
+  "parcelTsPluginOptions": {
+    // If true type-checking is disabled
+    "transpileOnly": false
+  },
+  "include": ["./src/**/*"],
+  "exclude": [
+    "node_modules"
+  ]
+}
