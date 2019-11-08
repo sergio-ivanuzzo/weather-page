@@ -1,6 +1,7 @@
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
-export interface IWeatherFormProps {
-    fetchWeather: (request) => Promise<void>;
+import { IForecastData } from 'reducers/weatherReducer';
+
+export interface IWeatherCardProps extends IForecastData{
     classes: Record<keyof CSSProperties, string>;
 }

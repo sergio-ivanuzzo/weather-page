@@ -1,11 +1,10 @@
 import * as React from 'react';
-
 import { Provider } from 'react-redux';
 
 import { store } from 'store/store';
 
 import WeatherContainer, { IWeatherContainerChildProps } from 'containers/WeatherContainer';
-import { WeatherUI } from "components/WeatherUI/WeatherUI";
+import WeatherUI from 'components/WeatherUI/WeatherUI';
 
 
 class App extends React.Component {

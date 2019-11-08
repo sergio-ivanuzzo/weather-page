@@ -1,1 +1,1 @@
-export * from './WeatherUI';
+export { default } from './WeatherUI';
